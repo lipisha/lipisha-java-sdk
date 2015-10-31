@@ -50,7 +50,7 @@ public class APIExample {
         AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime(TEST_MOBILE_NUMBER, 100, AIRTIME_ACCOUNT_NUMBER, "SAF");
         echo("Airtime:Amount", airtimeDisbursement.getAmount());
         echo("Airtime:Number", airtimeDisbursement.getMobileNumber());
-        echo("Airtime:Reference", airtimeDisbursement.getMobileNumber());
+        echo("Airtime:Reference", airtimeDisbursement.getReference());
     }
 
     public static void main( String[] args )
