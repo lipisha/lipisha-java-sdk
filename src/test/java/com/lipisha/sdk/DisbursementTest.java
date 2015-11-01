@@ -2,6 +2,7 @@ package com.lipisha.sdk;
 
 import com.lipisha.sdk.response.AirtimeDisbursement;
 import com.lipisha.sdk.response.Payout;
+import com.lipisha.sdk.response.SMSReport;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -32,7 +33,8 @@ public class DisbursementTest extends TestCase {
     }
 
     public void testSendMoney() {
-        Payout payout = lipishaClient.sendMoney("0722123456", 100, TestConfig.PAYOUT_ACCOUNT_NUMBER);
+        Payout payout = lipishaClient.sendMoney(TestConfig.TEST_MOBILE_NUMBER, 100, TestConfig.PAYOUT_ACCOUNT_NUMBER);
+        assertEquals(true, payout.isSuccessful());
         assertNotNull(payout.getAmount());
         assertNotNull(payout.getCustomerName());
         assertNotNull(payout.getMobileNumber());
@@ -41,8 +43,9 @@ public class DisbursementTest extends TestCase {
     }
 
     public void testSendAirtime() {
-        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime("0722123456", 100,
+        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime(TestConfig.TEST_MOBILE_NUMBER, 100,
                 TestConfig.AIRTIME_ACCOUNT_NUMBER, "SAF");
+        assertEquals(true, airtimeDisbursement.isSuccessful());
         assertNotNull(airtimeDisbursement.getMobileNumber());
         assertNotNull(airtimeDisbursement.getReference());
         assertNotNull(airtimeDisbursement.getAmount());
@@ -50,8 +53,18 @@ public class DisbursementTest extends TestCase {
     }
 
     public void testSendAirtimeInvalidAmount() {
-        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime("0722123456", 0,
+        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime(TestConfig.TEST_MOBILE_NUMBER, 0,
                 TestConfig.AIRTIME_ACCOUNT_NUMBER, "SAF");
+        assertEquals(false, airtimeDisbursement.isSuccessful());
         assertEquals(airtimeDisbursement.getStatusResponse().getStatus(), "FAIL");
+    }
+    
+    public void testSendSMS(){
+        SMSReport smsReport = lipishaClient.sendSMS(TestConfig.TEST_MOBILE_NUMBER, TestConfig.AIRTIME_ACCOUNT_NUMBER,
+                "TEST MESSAGE");
+        assertEquals(true, smsReport.isSuccessful());
+        assertNotNull(smsReport.getMessage());
+        assertNotNull(smsReport.getRecipient());
+        assertNotNull(smsReport.getCost());
     }
 }
