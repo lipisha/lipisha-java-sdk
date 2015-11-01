@@ -15,17 +15,14 @@
  */
 package com.lipisha.sdk.api;
 
-import com.lipisha.sdk.response.AccountBalance;
-import com.lipisha.sdk.response.AccountFloat;
-import com.lipisha.sdk.response.AirtimeDisbursement;
-import com.lipisha.sdk.response.Payout;
+import com.lipisha.sdk.response.*;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
- *
+ * <p/>
  * <p>See API documentation here: http://developer.lipisha.com/index.php/app/launch/api</p>
  */
 public interface LipishaAPI {
@@ -54,4 +51,12 @@ public interface LipishaAPI {
                                     @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                     @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
                                     @Field("amount") int airtimeAmount, @Field("network") String network);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/send_sms")
+    SMSReport sendSMS(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                      @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                      @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
+                      @Field("message") String message);
+
 }

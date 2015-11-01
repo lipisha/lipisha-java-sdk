@@ -4,7 +4,7 @@
     <groupId>com.lipisha.sdk</groupId>
     <artifactId>lipisha-sdk</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>lipisha-sdk</name>
     <organization>
         <name>Lipisha Consortium Limited</name>

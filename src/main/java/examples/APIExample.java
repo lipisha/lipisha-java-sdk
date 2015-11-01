@@ -1,10 +1,7 @@
 package examples;
 
 import com.lipisha.sdk.LipishaClient;
-import com.lipisha.sdk.response.AccountBalance;
-import com.lipisha.sdk.response.AccountFloat;
-import com.lipisha.sdk.response.AirtimeDisbursement;
-import com.lipisha.sdk.response.Payout;
+import com.lipisha.sdk.response.*;
 
 /**
  * Example of API Integration
@@ -53,6 +50,13 @@ public class APIExample {
         echo("Airtime:Reference", airtimeDisbursement.getReference());
     }
 
+    public void sendSMSTest(){
+        SMSReport smsReport = lipishaClient.sendSMS(TEST_MOBILE_NUMBER, FLOAT_ACCOUNT_NUMBER, "TEST MESSAGE");
+        echo("SMS:Message", smsReport.getMessage());
+        echo("SMS:Recipient", smsReport.getRecipient());
+        echo("SMS:Cost", smsReport.getCost());
+    }
+
     public static void main( String[] args )
     {
         APIExample apiExample = new APIExample();
@@ -60,6 +64,7 @@ public class APIExample {
         apiExample.getFloatBalanceTest();
         apiExample.sendMoneyTest();
         apiExample.sendAirtimeTest();
+        apiExample.sendSMSTest();
     }
 
 }

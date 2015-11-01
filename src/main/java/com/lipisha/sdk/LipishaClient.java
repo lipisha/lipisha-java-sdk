@@ -2,10 +2,7 @@ package com.lipisha.sdk;
 
 import com.lipisha.sdk.api.LipishaAPI;
 import com.lipisha.sdk.api.ServiceGenerator;
-import com.lipisha.sdk.response.AccountBalance;
-import com.lipisha.sdk.response.AccountFloat;
-import com.lipisha.sdk.response.AirtimeDisbursement;
-import com.lipisha.sdk.response.Payout;
+import com.lipisha.sdk.response.*;
 
 /**
  * Implements the primary client for access to
@@ -97,6 +94,17 @@ public class LipishaClient {
     public AirtimeDisbursement sendAirtime(String mobileNumber, int airtimeAmount, String airtimeAccount, String networkCode){
         return this.lipishaAPI.sendAirtime(apiKey, apiSignature, apiVersion, apiType, airtimeAccount, mobileNumber,
                 airtimeAmount, networkCode);
+    }
+
+    /**
+     *
+     * @param mobileNumber      Mobile number to send SMS to
+     * @param smsAccount        Account to charge for sending SMS
+     * @param message           SMS Message content
+     * @return
+     */
+    public SMSReport sendSMS(String mobileNumber, String smsAccount, String message) {
+        return this.lipishaAPI.sendSMS(apiKey, apiSignature, apiVersion, apiType, smsAccount, mobileNumber, message);
     }
 
 }

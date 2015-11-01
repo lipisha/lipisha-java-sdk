@@ -22,6 +22,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public class StatusResponse {
 
+    private static final int STATUS_SUCCESSFUL = 0;
+
     @SerializedName("status")
     private String status;
     @SerializedName("status_code")
@@ -47,4 +49,7 @@ public class StatusResponse {
         return statusDescription;
     }
 
+    public boolean isSuccessful(){
+        return getStatusCode() == STATUS_SUCCESSFUL;
+    }
 }

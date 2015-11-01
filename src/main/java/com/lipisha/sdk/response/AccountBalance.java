@@ -22,27 +22,13 @@ import java.util.Map;
 /**
  * Returns balance response from Lipisha.
  */
-public class AccountBalance {
+public class AccountBalance extends BaseResponse {
 
     private static final String BALANCE_KEY = "balance";
     private static final String CURRENCY_KEY = "currency";
 
-    @SerializedName("status")
-    private StatusResponse statusResponse;
-    @SerializedName("content")
-    private Map<String, String> contentResponse;
-
     public AccountBalance(StatusResponse statusResponse, Map<String, String> contentResponse) {
-        this.statusResponse = statusResponse;
-        this.contentResponse = contentResponse;
-    }
-
-    public StatusResponse getStatusResponse() {
-        return statusResponse;
-    }
-
-    public Map<String, String> getContentResponse() {
-        return contentResponse;
+        super(statusResponse, contentResponse);
     }
 
     public String getBalance(){
