@@ -20,6 +20,8 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
+import java.util.Date;
+
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
  * <p/>
@@ -59,4 +61,45 @@ public interface LipishaAPI {
                       @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
                       @Field("message") String message);
 
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/acknowledge_transaction")
+    TransactionResponse confirmTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                           @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                           @Field("transaction") String transactionIds);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/reconcile_transaction")
+    TransactionResponse reconcileTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                             @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                             @Field("transaction") String transactionId,
+                                             @Field("transaction_mobile_number") String mobileNumber,
+                                             @Field("transaction_account_number") String accountNumber,
+                                             @Field("transaction_reference") String reference);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/reverse_transaction")
+    TransactionsResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                            @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                            @Field("transaction") String transactionIds);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/get_transactions")
+    TransactionsResponse getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                         @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                         @Field("transaction") String transactionIds,
+                                         @Field("transaction_type") String transactionTypes,
+                                         @Field("transaction_method") String transactionMethods,
+                                         @Field("transaction_date_start") Date transactionDateStart,
+                                         @Field("transaction_date_end") Date transactionDateEnd,
+                                         @Field("transaction_account_name") String transactionAccountNames,
+                                         @Field("transaction_account_number") String transactionAccountNumbers,
+                                         @Field("transaction_reference") String transactionReferences,
+                                         @Field("transaction_amount_minimum") Float transactionAmountMinimum,
+                                         @Field("transaction_amount_maximum") Float transactionAmountMaximum,
+                                         @Field("transaction_status") String transactionStatuses,
+                                         @Field("transaction_name") String transactionName,
+                                         @Field("transaction_mobile_number") String transactionMobileNumber,
+                                         @Field("transaction_email") String transactionEmail,
+                                         @Field("limit") int limit,
+                                         @Field("offset") int offset);
 }

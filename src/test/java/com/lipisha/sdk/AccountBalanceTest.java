@@ -36,7 +36,7 @@ public class AccountBalanceTest
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        lipishaClient = new LipishaClient(TestConfig.API_KEY, TestConfig.API_SIGNATURE, LipishaClient.SANDBOX_BASE_URL);
+        lipishaClient = new LipishaClient(TestConfig.API_KEY, TestConfig.API_SIGNATURE, TestConfig.BASE_URL);
     }
 
     public void testGetBalance()

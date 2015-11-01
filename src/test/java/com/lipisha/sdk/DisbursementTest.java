@@ -16,7 +16,6 @@ public class DisbursementTest extends TestCase {
 
     public DisbursementTest(String name) {
         super(name);
-        this.lipishaClient = lipishaClient;
     }
 
     /**
@@ -29,11 +28,11 @@ public class DisbursementTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        lipishaClient = new LipishaClient(TestConfig.API_KEY, TestConfig.API_SIGNATURE, LipishaClient.SANDBOX_BASE_URL);
+        lipishaClient = new LipishaClient(TestConfig.API_KEY, TestConfig.API_SIGNATURE, TestConfig.BASE_URL);
     }
 
     public void testSendMoney() {
-        Payout payout = lipishaClient.sendMoney(TestConfig.TEST_MOBILE_NUMBER, 100, TestConfig.PAYOUT_ACCOUNT_NUMBER);
+        Payout payout = lipishaClient.sendMoney(TestConfig.TEST_MOBILE_NUMBER, 10, TestConfig.PAYOUT_ACCOUNT_NUMBER);
         assertEquals(true, payout.isSuccessful());
         assertNotNull(payout.getAmount());
         assertNotNull(payout.getCustomerName());
@@ -43,7 +42,7 @@ public class DisbursementTest extends TestCase {
     }
 
     public void testSendAirtime() {
-        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime(TestConfig.TEST_MOBILE_NUMBER, 100,
+        AirtimeDisbursement airtimeDisbursement = lipishaClient.sendAirtime(TestConfig.TEST_MOBILE_NUMBER, 10,
                 TestConfig.AIRTIME_ACCOUNT_NUMBER, "SAF");
         assertEquals(true, airtimeDisbursement.isSuccessful());
         assertNotNull(airtimeDisbursement.getMobileNumber());

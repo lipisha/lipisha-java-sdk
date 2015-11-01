@@ -3,7 +3,6 @@ package com.lipisha.sdk.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.google.gson.internal.bind.DateTypeAdapter;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
 
@@ -18,7 +17,7 @@ public class ServiceGenerator {
     private static final String DEFAULT_API_VERSION = "1.3.0";
 
     private static Gson gson = new GsonBuilder()
-            .registerTypeAdapter(Date.class, new DateTypeAdapter())
+            .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
 
     public static <S> S createService(Class<S> serviceClass, String baseURL){
