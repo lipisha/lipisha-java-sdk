@@ -139,4 +139,42 @@ public interface LipishaAPI {
                             @Field("mobile_number") String mobileNumber,
                             @Field("user_name") String userName,
                             @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/authorize_card_transaction")
+    CardTransactionResponse authorizeCardTransaction(@Field("api_key") String apiKey,
+                                                     @Field("api_signature") String apiSignature,
+                                                     @Field("api_version") String apiVersion,
+                                                     @Field("api_type") String apiType,
+                                                     @Field("account_number") String accountNumber,
+                                                     @Field("card_number") String cardNumber,
+                                                     @Field("address1") String address1,
+                                                     @Field("address2") String address2,
+                                                     @Field("expiry") String expiry,
+                                                     @Field("name") String name,
+                                                     @Field("state") String state,
+                                                     @Field("country") String country,
+                                                     @Field("zip") String zipCode,
+                                                     @Field("security_code") String securityCode,
+                                                     @Field("amount") Float amount,
+                                                     @Field("currency") String currency);
+
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/complete_card_transaction")
+    CardTransactionResponse completeCardTransaction(@Field("api_key") String apiKey,
+                                                    @Field("api_signature") String apiSignature,
+                                                    @Field("api_version") String apiVersion,
+                                                    @Field("api_type") String apiType,
+                                                    @Field("transaction_index") String accountNumber,
+                                                    @Field("transaction_reference") String cardNumber);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/reverse_card_transaction")
+    CardTransactionResponse reverseCardTransaction(@Field("api_key") String apiKey,
+                                                   @Field("api_signature") String apiSignature,
+                                                   @Field("api_version") String apiVersion,
+                                                   @Field("api_type") String apiType,
+                                                   @Field("transaction_index") String accountNumber,
+                                                   @Field("transaction_reference") String cardNumber);
 }

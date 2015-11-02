@@ -305,10 +305,93 @@ public class LipishaClient {
                 accountType, accountName, accountManager, accountNumber, bankName, bankBranch, bankAddress, swiftCode);
     }
 
+    /**
+     * Creates a user
+     *
+     * @param fullName          Full names for the user
+     * @param role              Role to assign to the user e.g. Airtime or Dashboard (Roles must exist on Lipisha)
+     * @param email             Email address for this user
+     * @param mobileNumber      Mobile phone number for this user
+     * @param userName          Login for this user
+     * @param password          Password for this user
+     * @return
+     */
     public UserResponse createUser(String fullName, String role, String email, String mobileNumber, String userName,
                                    String password) {
         return this.lipishaAPI.createUser(apiKey, apiSignature, apiVersion, apiType,
                 fullName, role, email, mobileNumber, userName, password);
+    }
+
+    /**
+     * <p>This API call for authorizes a credit card transaction locking in the
+     * specified amount in the card holder's bank account.</p>
+     *
+     * <p>The transaction then needs to be completed using the {@link #completeCardTransaction(String, String)} call to effect
+     * settlement of funds into the merchant's account or reversed using the {@link #reverseCardTransaction(String, String)}
+     * API call.</p>
+     *
+     * <p>This function reserves funds on the cardholder's account and if successful then you must call the
+     * {@link #completeCardTransaction(String, String)} function with the transaction_index and transaction_reference returned by
+     * this function to actually move the money to your account.</p>
+     *
+     * <p>Kindly note that in some cases, debit card transactions may be settled before the <b>Complete Card
+     * Transaction</b> API call is completed and may NOT be reversible depending on the issuing bank.</p>
+     *
+     * @param accountNumber     The lipisha account number to which the transaction will be charged e.g. 00500
+     * @param cardNumber        Full 16 digit card number with no spaces
+     * @param address1          Address line 1 one of the card holder
+     * @param address2          Address line 2 of the card holder (Optional)
+     * @param expiry            Expiry date of the card in this format MMYYYY
+     * @param name              Cardholder names as printed on the card
+     * @param state             State of the cardholder
+     * @param country           Country of the cardholder
+     * @param zipCode           Zipcode of the cardholder
+     * @param securityCode      Security code (Usually at the back of the card)
+     * @param amount            Amount to charge the card
+     * @param currency          Currecy code to charge the card in ISO_4217 format
+     * @return
+     */
+    public CardTransactionResponse authorizeCardTransaction(String accountNumber, String cardNumber, String address1,
+                                                            @Nullable String address2, String expiry, String name,
+                                                            String state, String country, String zipCode,
+                                                            String securityCode, Float amount, String currency) {
+        return this.lipishaAPI.authorizeCardTransaction(apiKey, apiSignature, apiVersion, apiType,
+                accountNumber, cardNumber, address1, address2, expiry,
+                name, state, country, zipCode, securityCode, amount, currency);
+    }
+
+    /**
+     * <p>This API call completes a credit card transaction and initiates settlement of funds from the cardholder bank
+     * account into the merchant's account.</p>
+     *
+     * <p>This function moves already reserved funds on the cardholder's account into your account. It's called with
+     * the {@param transaction_index} and {@param transaction_reference} returned by the
+     * {@link #authorizeCardTransaction} API call to actually move the money to your account.</p>
+     *
+     * @param transactionIndex
+     * @param transactionReference
+     * @return
+     */
+    public CardTransactionResponse completeCardTransaction(String transactionIndex, String transactionReference) {
+        return this.lipishaAPI.completeCardTransaction(apiKey, apiSignature, apiVersion, apiType,
+                transactionIndex, transactionReference);
+    }
+
+    /**
+     *
+     * <p>This API call reverses an authorized credit card transaction.</p>
+     *
+     * <p>This function unreserves funds previously authorized. It's called with the
+     * {@param transaction_index} and {@param transaction_reference} returned by the {@link #authorizeCardTransaction}
+     * to reverse the authorization.
+     *
+     * @param transactionIndex
+     * @param transactionReference
+     * @return
+     */
+    public CardTransactionResponse reverseCardTransaction(String transactionIndex, String transactionReference) {
+        return this.lipishaAPI.reverseCardTransaction(apiKey, apiSignature, apiVersion, apiType,
+                transactionIndex, transactionReference);
     }
 
 
