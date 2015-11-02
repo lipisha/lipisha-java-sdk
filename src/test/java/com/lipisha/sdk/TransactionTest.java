@@ -2,7 +2,7 @@ package com.lipisha.sdk;
 
 import com.lipisha.sdk.response.Transaction;
 import com.lipisha.sdk.response.TransactionResponse;
-import com.lipisha.sdk.response.TransactionsResponse;
+import com.lipisha.sdk.response.MultiTransactionResponse;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -56,7 +56,7 @@ public class TransactionTest extends TestCase {
     }
 
     public void testReverseTransaction() {
-        TransactionsResponse transactionResponse = lipishaClient.reverseTransaction(TestConfig.TRANSACTION_ID_REVERSE);
+        MultiTransactionResponse transactionResponse = lipishaClient.reverseTransaction(TestConfig.TRANSACTION_ID_REVERSE);
         assertEquals(true, transactionResponse.isSuccessful());
         Transaction transaction = transactionResponse.getTransactions().get(0);
         assertNotNull(transaction);
@@ -64,7 +64,7 @@ public class TransactionTest extends TestCase {
     }
 
     public void testGetTransactionsById() {
-        TransactionsResponse transactionResponse = lipishaClient.getTransactions(TestConfig.TRANSACTION_ID_SEARCH,
+        MultiTransactionResponse transactionResponse = lipishaClient.getTransactions(TestConfig.TRANSACTION_ID_SEARCH,
                 null, null, null, null, null, null, null, null, null, null, null, null, null);
         List<Transaction> transactions = transactionResponse.getTransactions();
         assertEquals(true, transactionResponse.isSuccessful());

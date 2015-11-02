@@ -74,14 +74,14 @@ public class APIExample {
     }
 
     public void reverseTransaction() {
-        TransactionsResponse transactionResponse = lipishaClient.reverseTransaction("B4F16908F");
+        MultiTransactionResponse transactionResponse = lipishaClient.reverseTransaction("B4F16908F");
         Transaction transaction = transactionResponse.getTransactions().get(0);
         echo("Transaction:Id", transaction.getTransactionId());
         echo("Transaction:Status", transaction.getTransactionStatus());
     }
 
     public void getTransactions(){
-        TransactionsResponse transactionResponse = lipishaClient.getTransactions("B4F16908F", null, null, null,
+        MultiTransactionResponse transactionResponse = lipishaClient.getTransactions("B4F16908F", null, null, null,
                 null, null, null, null, null, null, null, null, null, null, 10, 0);
         for (Transaction transaction: transactionResponse.getTransactions()) {
             echo("Transaction:Id", transaction.getTransactionId());

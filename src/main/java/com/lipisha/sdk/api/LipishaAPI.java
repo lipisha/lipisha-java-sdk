@@ -78,13 +78,13 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/reverse_transaction")
-    TransactionsResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    MultiTransactionResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                             @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                             @Field("transaction") String transactionIds);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_transactions")
-    TransactionsResponse getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    MultiTransactionResponse getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                          @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                          @Field("transaction") String transactionIds,
                                          @Field("transaction_type") String transactionTypes,
@@ -102,4 +102,9 @@ public interface LipishaAPI {
                                          @Field("transaction_email") String transactionEmail,
                                          @Field("limit") int limit,
                                          @Field("offset") int offset);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/get_customers")
+    CustomerResponse getCustomers(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                  @Field("api_version") String apiVersion, @Field("api_type") String apiType);
 }
