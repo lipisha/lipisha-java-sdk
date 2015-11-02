@@ -277,7 +277,7 @@ public class LipishaClient {
      *
      * @param accountType       TransactionAccount type identifier. e.g. 1 for Mpesa Paybill/Airtel Money
      * @param accountName       Name of the new account
-     * @param accountManager    Login name of parent account of this new account
+     * @param accountManager    Login name of parent account to this new account
      * @return
      */
     public TransactionAccountResponse createTransactionAccount(int accountType, String accountName, String accountManager){
@@ -285,11 +285,30 @@ public class LipishaClient {
                 accountType, accountName,accountManager);
     }
 
+    /**
+     * Create a withdrawal account (used for settlement)
+     *
+     * @param accountType       Account Type e.g. 1  for bank accounts
+     * @param accountName       Friendly name for account
+     * @param accountManager    Login name of parent account to this new account
+     * @param accountNumber     Bank account number
+     * @param bankName          Bank name
+     * @param bankBranch        Bank branch
+     * @param bankAddress       Bank address
+     * @param swiftCode         Swift code for associated bank or bank branch
+     * @return
+     */
     public WithdrawalAccountResponse createWithdrawalAccount(int accountType, String accountName, String accountManager,
                                                              String accountNumber, String bankName, String bankBranch,
-                                                             String bankAddress, String swiftCode){
+                                                             String bankAddress, String swiftCode) {
         return this.lipishaAPI.createWithdrawalAccount(apiKey, apiSignature, apiVersion, apiType,
                 accountType, accountName, accountManager, accountNumber, bankName, bankBranch, bankAddress, swiftCode);
+    }
+
+    public UserResponse createUser(String fullName, String role, String email, String mobileNumber, String userName,
+                                   String password) {
+        return this.lipishaAPI.createUser(apiKey, apiSignature, apiVersion, apiType,
+                fullName, role, email, mobileNumber, userName, password);
     }
 
 

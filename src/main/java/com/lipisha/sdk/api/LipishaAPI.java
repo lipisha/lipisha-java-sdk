@@ -129,4 +129,14 @@ public interface LipishaAPI {
                                                       @Field("transaction_account_bank_address") String bankAddress,
                                                       @Field("transaction_account_swift_code") String swiftCode);
 
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/create_user")
+    UserResponse createUser(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                            @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                            @Field("full_name") String fullName,
+                            @Field("role") String role,
+                            @Field("email") String email,
+                            @Field("mobile_number") String mobileNumber,
+                            @Field("user_name") String userName,
+                            @Field("password") String password);
 }
