@@ -15,8 +15,6 @@
  */
 package com.lipisha.sdk.response;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.util.Map;
 
 /**

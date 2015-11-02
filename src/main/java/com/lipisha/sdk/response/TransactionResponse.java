@@ -2,8 +2,6 @@ package com.lipisha.sdk.response;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 /**
  * Response from acknowledging a transaction
  */

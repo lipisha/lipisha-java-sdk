@@ -20,7 +20,6 @@ import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.POST;
 
-import java.util.Date;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
@@ -68,15 +67,6 @@ public interface LipishaAPI {
                                            @Field("transaction") String transactionIds);
 
     @FormUrlEncoded
-    @POST("/index.php/v2/api/reconcile_transaction")
-    TransactionResponse reconcileTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
-                                             @Field("api_version") String apiVersion, @Field("api_type") String apiType,
-                                             @Field("transaction") String transactionId,
-                                             @Field("transaction_mobile_number") String mobileNumber,
-                                             @Field("transaction_account_number") String accountNumber,
-                                             @Field("transaction_reference") String reference);
-
-    @FormUrlEncoded
     @POST("/index.php/v2/api/reverse_transaction")
     MultiTransactionResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                                 @Field("api_version") String apiVersion, @Field("api_type") String apiType,
@@ -89,8 +79,8 @@ public interface LipishaAPI {
                                              @Field("transaction") String transactionIds,
                                              @Field("transaction_type") String transactionTypes,
                                              @Field("transaction_method") String transactionMethods,
-                                             @Field("transaction_date_start") Date transactionDateStart,
-                                             @Field("transaction_date_end") Date transactionDateEnd,
+                                             @Field("transaction_date_start") String transactionDateStart,
+                                             @Field("transaction_date_end") String transactionDateEnd,
                                              @Field("transaction_account_name") String transactionAccountNames,
                                              @Field("transaction_account_number") String transactionAccountNumbers,
                                              @Field("transaction_reference") String transactionReferences,

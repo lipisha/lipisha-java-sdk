@@ -5,6 +5,7 @@ import com.lipisha.sdk.api.ServiceGenerator;
 import com.lipisha.sdk.response.*;
 import com.sun.istack.internal.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -17,6 +18,8 @@ public class LipishaClient {
     private static final String API_VERSION = "1.3.0";
     private static final String API_TYPE_CALLBACK = "Callback";
     private static final String API_TYPE_IPN = "Ipn";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
 
     private String apiKey, apiSignature, apiVersion, apiType;
     private LipishaAPI lipishaAPI;
@@ -155,28 +158,13 @@ public class LipishaClient {
     /**
      * Confirm transaction id (Useful when working via IPN)
      *
-     * @param transactionId Transaction id to acknowledge (May be comma separated string of transactions)
+     * @param transactionId Transaction id to acknowledge
      * @return
      */
     public TransactionResponse confirmTransaction(String transactionId) {
         return this.lipishaAPI.confirmTransaction(apiKey, apiSignature, apiVersion, apiType, transactionId);
     }
 
-
-    /**
-     * Reconcile records for specified transaction. Updates transaction properties.
-     *
-     * @param transactionId Transaction id to update
-     * @param mobileNumber  New transaction mobile number
-     * @param accountNumber New transaction account number to which to move the transacition
-     * @param reference     New transaction reference
-     * @return
-     */
-    @Deprecated
-    public TransactionResponse reconcileTransaction(String transactionId, String mobileNumber,
-                                                    String accountNumber, String reference) {
-        throw new UnsupportedOperationException();
-    }
 
     /**
      * Returns transactions based on provided filter parameters.
@@ -216,8 +204,12 @@ public class LipishaClient {
                                                 @Nullable String transactionEmail,
                                                 @Nullable int limit,
                                                 @Nullable int offset) {
+
+        String strTransactionDateStart = (transactionDateStart == null) ? null : DATE_FORMATTER.format(transactionDateStart);
+        String strTransactionDateEnd = (transactionDateEnd == null) ? null : DATE_FORMATTER.format(transactionDateEnd);
+
         return this.lipishaAPI.getTransactions(apiKey, apiSignature, apiVersion, apiType,
-                transactionIds, transactionTypes, transactionMethods, transactionDateStart, transactionDateEnd,
+                transactionIds, transactionTypes, transactionMethods, strTransactionDateStart, strTransactionDateEnd,
                 transactionAccountNames, transactionAccountNumbers, transactionReferences, transactionAmountMinimum,
                 transactionAmountMaximum, transactionStatuses, transactionName, transactionMobileNumber,
                 transactionEmail, limit, offset);
@@ -256,8 +248,13 @@ public class LipishaClient {
                                                 @Nullable String transactionName,
                                                 @Nullable String transactionMobileNumber,
                                                 @Nullable String transactionEmail) {
+
+
+        String strTransactionDateStart = (transactionDateStart == null) ? null : DATE_FORMATTER.format(transactionDateStart);
+        String strTransactionDateEnd = (transactionDateEnd == null) ? null : DATE_FORMATTER.format(transactionDateEnd);
+
         return this.lipishaAPI.getTransactions(apiKey, apiSignature, apiVersion, apiType,
-                transactionIds, transactionTypes, transactionMethods, transactionDateStart, transactionDateEnd,
+                transactionIds, transactionTypes, transactionMethods, strTransactionDateStart, strTransactionDateEnd,
                 transactionAccountNames, transactionAccountNumbers, transactionReferences, transactionAmountMinimum,
                 transactionAmountMaximum, transactionStatuses, transactionName, transactionMobileNumber,
                 transactionEmail, 1000, 0);

@@ -1,8 +1,8 @@
 package com.lipisha.sdk;
 
+import com.lipisha.sdk.response.MultiTransactionResponse;
 import com.lipisha.sdk.response.Transaction;
 import com.lipisha.sdk.response.TransactionResponse;
-import com.lipisha.sdk.response.MultiTransactionResponse;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -34,7 +34,7 @@ public class TransactionTest extends TestCase {
     }
 
     public void testConfirmTransaction() {
-        TransactionResponse acknowledgement = lipishaClient.confirmTransaction(TestConfig.TRANSACTION_IDS);
+        TransactionResponse acknowledgement = lipishaClient.confirmTransaction(TestConfig.TRANSACTION_ID_ACKNOWLEDGE);
         assertEquals(true, acknowledgement.isSuccessful());
         Transaction transaction = acknowledgement.getTransaction();
         assertNotNull(transaction);
@@ -43,16 +43,6 @@ public class TransactionTest extends TestCase {
         assertNotNull(transaction.getTransactionDate());
         assertNotNull(transaction.getTransactionStatus());
         assertNotNull(transaction.getTransactionType());
-    }
-
-    public void testReconcileTransaction() {
-        String newReference = "NEW-TX-REF";
-        TransactionResponse transactionResponse = lipishaClient.reconcileTransaction(TestConfig.TRANSACTION_ID_RECONCILE,
-                TestConfig.TEST_MOBILE_NUMBER, TestConfig.FLOAT_ACCOUNT_NUMBER, newReference);
-        assertEquals(true, transactionResponse.isSuccessful());
-        Transaction transaction = transactionResponse.getTransaction();
-        assertNotNull(transaction);
-        assertEquals(transaction.getTransactionReference(), newReference);
     }
 
     public void testReverseTransaction() {
@@ -72,5 +62,16 @@ public class TransactionTest extends TestCase {
         Transaction transaction = transactions.get(0);
         assertEquals(TestConfig.TRANSACTION_ID_SEARCH, transaction.getTransactionId());
     }
+
+    public void testGetTransactionsByDate() {
+        MultiTransactionResponse transactionResponse = lipishaClient.getTransactions(null, null, null,
+                TestConfig.TRANSACTION_SEARCH_DATE_START, TestConfig.TRANSACTION_SEARCH_DATE_END,
+                null, null, null, null, null, null, null, null, null);
+        List<Transaction> transactions = transactionResponse.getTransactions();
+        assertEquals(true, transactionResponse.isSuccessful());
+        assertNotNull(transactions);
+        assertEquals(true, (transactions.size() > 0));
+    }
+
 
 }

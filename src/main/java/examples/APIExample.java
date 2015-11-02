@@ -65,14 +65,6 @@ public class APIExample {
         echo("Transaction:Status", transaction.getTransactionStatus());
     }
 
-    public void reconcileTransaction() {
-        TransactionResponse transactionResponse = lipishaClient.reconcileTransaction("B4F16908F",
-                TEST_MOBILE_NUMBER, FLOAT_ACCOUNT_NUMBER, "NEW-REF");
-        Transaction transaction = transactionResponse.getTransaction();
-        echo("Transaction:Id", transaction.getTransactionId());
-        echo("Transaction:Reference", transaction.getTransactionReference());
-    }
-
     public void reverseTransaction() {
         MultiTransactionResponse transactionResponse = lipishaClient.reverseTransaction("B4F16908F");
         Transaction transaction = transactionResponse.getTransactions().get(0);
