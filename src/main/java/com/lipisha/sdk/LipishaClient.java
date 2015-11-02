@@ -3,7 +3,6 @@ package com.lipisha.sdk;
 import com.lipisha.sdk.api.LipishaAPI;
 import com.lipisha.sdk.api.ServiceGenerator;
 import com.lipisha.sdk.response.*;
-import com.sun.istack.internal.Nullable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -188,22 +187,22 @@ public class LipishaClient {
      * @param offset                    First transaction to return (0 - start at the beginning, 9 - Start at 10th record)
      * @return
      */
-    public MultiTransactionResponse getTransactions(@Nullable String transactionIds,
-                                                @Nullable String transactionTypes,
-                                                @Nullable String transactionMethods,
-                                                @Nullable Date transactionDateStart,
-                                                @Nullable Date transactionDateEnd,
-                                                @Nullable String transactionAccountNames,
-                                                @Nullable String transactionAccountNumbers,
-                                                @Nullable String transactionReferences,
-                                                @Nullable Float transactionAmountMinimum,
-                                                @Nullable Float transactionAmountMaximum,
-                                                @Nullable String transactionStatuses,
-                                                @Nullable String transactionName,
-                                                @Nullable String transactionMobileNumber,
-                                                @Nullable String transactionEmail,
-                                                @Nullable int limit,
-                                                @Nullable int offset) {
+    public MultiTransactionResponse getTransactions(String transactionIds,
+                                                    String transactionTypes,
+                                                    String transactionMethods,
+                                                    Date transactionDateStart,
+                                                    Date transactionDateEnd,
+                                                    String transactionAccountNames,
+                                                    String transactionAccountNumbers,
+                                                    String transactionReferences,
+                                                    Float transactionAmountMinimum,
+                                                    Float transactionAmountMaximum,
+                                                    String transactionStatuses,
+                                                    String transactionName,
+                                                    String transactionMobileNumber,
+                                                    String transactionEmail,
+                                                    int limit,
+                                                    int offset) {
 
         String strTransactionDateStart = (transactionDateStart == null) ? null : DATE_FORMATTER.format(transactionDateStart);
         String strTransactionDateEnd = (transactionDateEnd == null) ? null : DATE_FORMATTER.format(transactionDateEnd);
@@ -234,20 +233,20 @@ public class LipishaClient {
      * @param transactionEmail          Email address associated with transaction
      * @return
      */
-    public MultiTransactionResponse getTransactions(@Nullable String transactionIds,
-                                                @Nullable String transactionTypes,
-                                                @Nullable String transactionMethods,
-                                                @Nullable Date transactionDateStart,
-                                                @Nullable Date transactionDateEnd,
-                                                @Nullable String transactionAccountNames,
-                                                @Nullable String transactionAccountNumbers,
-                                                @Nullable String transactionReferences,
-                                                @Nullable Float transactionAmountMinimum,
-                                                @Nullable Float transactionAmountMaximum,
-                                                @Nullable String transactionStatuses,
-                                                @Nullable String transactionName,
-                                                @Nullable String transactionMobileNumber,
-                                                @Nullable String transactionEmail) {
+    public MultiTransactionResponse getTransactions(String transactionIds,
+                                                    String transactionTypes,
+                                                    String transactionMethods,
+                                                    Date transactionDateStart,
+                                                    Date transactionDateEnd,
+                                                    String transactionAccountNames,
+                                                    String transactionAccountNumbers,
+                                                    String transactionReferences,
+                                                    Float transactionAmountMinimum,
+                                                    Float transactionAmountMaximum,
+                                                    String transactionStatuses,
+                                                    String transactionName,
+                                                    String transactionMobileNumber,
+                                                    String transactionEmail) {
 
 
         String strTransactionDateStart = (transactionDateStart == null) ? null : DATE_FORMATTER.format(transactionDateStart);
@@ -265,34 +264,34 @@ public class LipishaClient {
      *
      * @return
      */
-    public CustomerResponse getCustomers(){
+    public CustomerResponse getCustomers() {
         return this.lipishaAPI.getCustomers(apiKey, apiSignature, apiVersion, apiType);
     }
 
     /**
      * Creates a transaction account
      *
-     * @param accountType       TransactionAccount type identifier. e.g. 1 for Mpesa Paybill/Airtel Money
-     * @param accountName       Name of the new account
-     * @param accountManager    Login name of parent account to this new account
+     * @param accountType    TransactionAccount type identifier. e.g. 1 for Mpesa Paybill/Airtel Money
+     * @param accountName    Name of the new account
+     * @param accountManager Login name of parent account to this new account
      * @return
      */
-    public TransactionAccountResponse createTransactionAccount(int accountType, String accountName, String accountManager){
+    public TransactionAccountResponse createTransactionAccount(int accountType, String accountName, String accountManager) {
         return this.lipishaAPI.createTransactionAccount(apiKey, apiSignature, apiVersion, apiType,
-                accountType, accountName,accountManager);
+                accountType, accountName, accountManager);
     }
 
     /**
      * Create a withdrawal account (used for settlement)
      *
-     * @param accountType       Account Type e.g. 1  for bank accounts
-     * @param accountName       Friendly name for account
-     * @param accountManager    Login name of parent account to this new account
-     * @param accountNumber     Bank account number
-     * @param bankName          Bank name
-     * @param bankBranch        Bank branch
-     * @param bankAddress       Bank address
-     * @param swiftCode         Swift code for associated bank or bank branch
+     * @param accountType    Account Type e.g. 1  for bank accounts
+     * @param accountName    Friendly name for account
+     * @param accountManager Login name of parent account to this new account
+     * @param accountNumber  Bank account number
+     * @param bankName       Bank name
+     * @param bankBranch     Bank branch
+     * @param bankAddress    Bank address
+     * @param swiftCode      Swift code for associated bank or bank branch
      * @return
      */
     public WithdrawalAccountResponse createWithdrawalAccount(int accountType, String accountName, String accountManager,
@@ -305,12 +304,12 @@ public class LipishaClient {
     /**
      * Creates a user
      *
-     * @param fullName          Full names for the user
-     * @param role              Role to assign to the user e.g. Airtime or Dashboard (Roles must exist on Lipisha)
-     * @param email             Email address for this user
-     * @param mobileNumber      Mobile phone number for this user
-     * @param userName          Login for this user
-     * @param password          Password for this user
+     * @param fullName     Full names for the user
+     * @param role         Role to assign to the user e.g. Airtime or Dashboard (Roles must exist on Lipisha)
+     * @param email        Email address for this user
+     * @param mobileNumber Mobile phone number for this user
+     * @param userName     Login for this user
+     * @param password     Password for this user
      * @return
      */
     public UserResponse createUser(String fullName, String role, String email, String mobileNumber, String userName,
@@ -322,34 +321,34 @@ public class LipishaClient {
     /**
      * <p>This API call for authorizes a credit card transaction locking in the
      * specified amount in the card holder's bank account.</p>
-     *
+     * <p/>
      * <p>The transaction then needs to be completed using the {@link #completeCardTransaction(String, String)} call to effect
      * settlement of funds into the merchant's account or reversed using the {@link #reverseCardTransaction(String, String)}
      * API call.</p>
-     *
+     * <p/>
      * <p>This function reserves funds on the cardholder's account and if successful then you must call the
      * {@link #completeCardTransaction(String, String)} function with the transaction_index and transaction_reference returned by
      * this function to actually move the money to your account.</p>
-     *
+     * <p/>
      * <p>Kindly note that in some cases, debit card transactions may be settled before the <b>Complete Card
      * Transaction</b> API call is completed and may NOT be reversible depending on the issuing bank.</p>
      *
-     * @param accountNumber     The lipisha account number to which the transaction will be charged e.g. 00500
-     * @param cardNumber        Full 16 digit card number with no spaces
-     * @param address1          Address line 1 one of the card holder
-     * @param address2          Address line 2 of the card holder (Optional)
-     * @param expiry            Expiry date of the card in this format MMYYYY
-     * @param name              Cardholder names as printed on the card
-     * @param state             State of the cardholder
-     * @param country           Country of the cardholder
-     * @param zipCode           Zipcode of the cardholder
-     * @param securityCode      Security code (Usually at the back of the card)
-     * @param amount            Amount to charge the card
-     * @param currency          Currecy code to charge the card in ISO_4217 format
+     * @param accountNumber The lipisha account number to which the transaction will be charged e.g. 00500
+     * @param cardNumber    Full 16 digit card number with no spaces
+     * @param address1      Address line 1 one of the card holder
+     * @param address2      Address line 2 of the card holder (Optional)  <b>May be null</b>
+     * @param expiry        Expiry date of the card in this format MMYYYY
+     * @param name          Cardholder names as printed on the card
+     * @param state         State of the cardholder
+     * @param country       Country of the cardholder
+     * @param zipCode       Zipcode of the cardholder
+     * @param securityCode  Security code (Usually at the back of the card)
+     * @param amount        Amount to charge the card
+     * @param currency      Currecy code to charge the card in ISO_4217 format
      * @return
      */
     public CardTransactionResponse authorizeCardTransaction(String accountNumber, String cardNumber, String address1,
-                                                            @Nullable String address2, String expiry, String name,
+                                                            String address2, String expiry, String name,
                                                             String state, String country, String zipCode,
                                                             String securityCode, Float amount, String currency) {
         return this.lipishaAPI.authorizeCardTransaction(apiKey, apiSignature, apiVersion, apiType,
@@ -360,7 +359,7 @@ public class LipishaClient {
     /**
      * <p>This API call completes a credit card transaction and initiates settlement of funds from the cardholder bank
      * account into the merchant's account.</p>
-     *
+     * <p/>
      * <p>This function moves already reserved funds on the cardholder's account into your account. It's called with
      * the {@param transaction_index} and {@param transaction_reference} returned by the
      * {@link #authorizeCardTransaction} API call to actually move the money to your account.</p>
@@ -375,9 +374,8 @@ public class LipishaClient {
     }
 
     /**
-     *
      * <p>This API call reverses an authorized credit card transaction.</p>
-     *
+     * <p/>
      * <p>This function unreserves funds previously authorized. It's called with the
      * {@param transaction_index} and {@param transaction_reference} returned by the {@link #authorizeCardTransaction}
      * to reverse the authorization.
