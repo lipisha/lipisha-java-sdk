@@ -79,32 +79,54 @@ public interface LipishaAPI {
     @FormUrlEncoded
     @POST("/index.php/v2/api/reverse_transaction")
     MultiTransactionResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
-                                            @Field("api_version") String apiVersion, @Field("api_type") String apiType,
-                                            @Field("transaction") String transactionIds);
+                                                @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                                @Field("transaction") String transactionIds);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_transactions")
     MultiTransactionResponse getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
-                                         @Field("api_version") String apiVersion, @Field("api_type") String apiType,
-                                         @Field("transaction") String transactionIds,
-                                         @Field("transaction_type") String transactionTypes,
-                                         @Field("transaction_method") String transactionMethods,
-                                         @Field("transaction_date_start") Date transactionDateStart,
-                                         @Field("transaction_date_end") Date transactionDateEnd,
-                                         @Field("transaction_account_name") String transactionAccountNames,
-                                         @Field("transaction_account_number") String transactionAccountNumbers,
-                                         @Field("transaction_reference") String transactionReferences,
-                                         @Field("transaction_amount_minimum") Float transactionAmountMinimum,
-                                         @Field("transaction_amount_maximum") Float transactionAmountMaximum,
-                                         @Field("transaction_status") String transactionStatuses,
-                                         @Field("transaction_name") String transactionName,
-                                         @Field("transaction_mobile_number") String transactionMobileNumber,
-                                         @Field("transaction_email") String transactionEmail,
-                                         @Field("limit") int limit,
-                                         @Field("offset") int offset);
+                                             @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                             @Field("transaction") String transactionIds,
+                                             @Field("transaction_type") String transactionTypes,
+                                             @Field("transaction_method") String transactionMethods,
+                                             @Field("transaction_date_start") Date transactionDateStart,
+                                             @Field("transaction_date_end") Date transactionDateEnd,
+                                             @Field("transaction_account_name") String transactionAccountNames,
+                                             @Field("transaction_account_number") String transactionAccountNumbers,
+                                             @Field("transaction_reference") String transactionReferences,
+                                             @Field("transaction_amount_minimum") Float transactionAmountMinimum,
+                                             @Field("transaction_amount_maximum") Float transactionAmountMaximum,
+                                             @Field("transaction_status") String transactionStatuses,
+                                             @Field("transaction_name") String transactionName,
+                                             @Field("transaction_mobile_number") String transactionMobileNumber,
+                                             @Field("transaction_email") String transactionEmail,
+                                             @Field("limit") int limit,
+                                             @Field("offset") int offset);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_customers")
     CustomerResponse getCustomers(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                   @Field("api_version") String apiVersion, @Field("api_type") String apiType);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/create_payment_account")
+    TransactionAccountResponse createTransactionAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                                        @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                                        @Field("transaction_account_type") int accountType,
+                                                        @Field("transaction_account_name") String accountName,
+                                                        @Field("transaction_account_manager") String accountManager);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/create_withdrawal_account")
+    WithdrawalAccountResponse createWithdrawalAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+                                                      @Field("api_version") String apiVersion, @Field("api_type") String apiType,
+                                                      @Field("transaction_account_type") int accountType,
+                                                      @Field("transaction_account_name") String accountName,
+                                                      @Field("transaction_account_manager") String accountManager,
+                                                      @Field("transaction_account_number") String accountNumber,
+                                                      @Field("transaction_account_bank_name") String bankName,
+                                                      @Field("transaction_account_bank_branch") String bankBranch,
+                                                      @Field("transaction_account_bank_address") String bankAddress,
+                                                      @Field("transaction_account_swift_code") String swiftCode);
+
 }

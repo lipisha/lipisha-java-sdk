@@ -102,7 +102,7 @@ public class LipishaClient {
 
     /**
      * @param mobileNumber Mobile number to send SMS to
-     * @param smsAccount   Account to charge for sending SMS
+     * @param smsAccount   TransactionAccount to charge for sending SMS
      * @param message      SMS Message content
      * @return
      */
@@ -187,7 +187,7 @@ public class LipishaClient {
      * @param transactionMethods        Transaction methods to filter against e.g. Paybill (M-Pesa)
      * @param transactionDateStart      Date of first transaction
      * @param transactionDateEnd        Date of last transaction
-     * @param transactionAccountNames   Transaction account names to look up e.g. Test Account
+     * @param transactionAccountNames   Transaction account names to look up e.g. Test TransactionAccount
      * @param transactionAccountNumbers Transaction account number to filter against e.g. 00155,00200
      * @param transactionReferences     Transaction references to filter against e.g.
      * @param transactionAmountMinimum  Lowest value of transaction to return
@@ -231,7 +231,7 @@ public class LipishaClient {
      * @param transactionMethods        Transaction methods to filter against e.g. Paybill (M-Pesa)
      * @param transactionDateStart      Date of first transaction
      * @param transactionDateEnd        Date of last transaction
-     * @param transactionAccountNames   Transaction account names to look up e.g. Test Account
+     * @param transactionAccountNames   Transaction account names to look up e.g. Test TransactionAccount
      * @param transactionAccountNumbers Transaction account number to filter against e.g. 00155,00200
      * @param transactionReferences     Transaction references to filter against e.g.
      * @param transactionAmountMinimum  Lowest value of transaction to return
@@ -271,5 +271,26 @@ public class LipishaClient {
     public CustomerResponse getCustomers(){
         return this.lipishaAPI.getCustomers(apiKey, apiSignature, apiVersion, apiType);
     }
+
+    /**
+     * Creates a transaction account
+     *
+     * @param accountType       TransactionAccount type identifier. e.g. 1 for Mpesa Paybill/Airtel Money
+     * @param accountName       Name of the new account
+     * @param accountManager    Login name of parent account of this new account
+     * @return
+     */
+    public TransactionAccountResponse createTransactionAccount(int accountType, String accountName, String accountManager){
+        return this.lipishaAPI.createTransactionAccount(apiKey, apiSignature, apiVersion, apiType,
+                accountType, accountName,accountManager);
+    }
+
+    public WithdrawalAccountResponse createWithdrawalAccount(int accountType, String accountName, String accountManager,
+                                                             String accountNumber, String bankName, String bankBranch,
+                                                             String bankAddress, String swiftCode){
+        return this.lipishaAPI.createWithdrawalAccount(apiKey, apiSignature, apiVersion, apiType,
+                accountType, accountName, accountManager, accountNumber, bankName, bankBranch, bankAddress, swiftCode);
+    }
+
 
 }
