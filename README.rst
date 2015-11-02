@@ -29,6 +29,16 @@ The class below showcases integration with the API.
 
 .. code-block:: java
 
+    Note that all responses from the API implement these methods.
+    These can be used to determine if the request was successful.
+
+    response.isSuccessful()
+    response.getStatusMessage()
+    response.getStatusDescription()
+    response.getStatusCode()
+
+.. code-block:: java
+
 
     package com.lipisha.sdk.examples;
 
