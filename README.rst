@@ -16,11 +16,15 @@ Features
 * Get Balance
 * Send airtime
 
-Examples
---------
+SDK Examples
+------------
 
 See examples here (https://github.com/lipisha/lipisha-java-sdk/src/main/java/examples)
 
+IPN Examples
+-------------
+
+https://github.com/lipisha/lipisha-java-sdk/IPNSample
 
 Quick start
 -----------
