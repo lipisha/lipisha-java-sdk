@@ -6,11 +6,14 @@
     <packaging>jar</packaging>
     <version>1.1</version>
     <name>lipisha-sdk</name>
+    <description>
+        Provides bindings for the Lipisha payments service.
+    </description>
+    <url>https://github.com/lipisha/lipisha-java-sdk</url>
     <organization>
         <name>Lipisha Consortium Limited</name>
         <url>https://lipisha.com/</url>
     </organization>
-    <url>http://maven.apache.org</url>
 
     <licenses>
         <license>

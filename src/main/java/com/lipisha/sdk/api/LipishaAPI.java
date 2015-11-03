@@ -23,7 +23,7 @@ import retrofit.http.POST;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
- * <p/>
+ * 
  * <p>See API documentation here: http://developer.lipisha.com/index.php/app/launch/api</p>
  */
 public interface LipishaAPI {
