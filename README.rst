@@ -24,7 +24,7 @@ See examples here (https://github.com/lipisha/lipisha-java-sdk/src/main/java/exa
 IPN Examples
 -------------
 
-https://github.com/lipisha/lipisha-java-sdk/IPNSample
+https://github.com/lipisha/lipisha-java-sdk/tree/master/IPNSample
 
 Quick start
 -----------
