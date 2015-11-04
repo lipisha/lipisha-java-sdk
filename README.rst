@@ -68,9 +68,7 @@ Quick start
 
 The class below showcases integration with the API.
 
-
-> Note that all responses from the API implement these methods.
-These can be used to determine if the request was successful.
+*Note that all responses from the API implement these methods. These can be used to determine if the request was successful.*
 
 .. code-block:: java
 
@@ -186,5 +184,4 @@ Example Integration
 
     }
 
-..
-> See documentation for detailed API. Refer to Lipisha API for parameters required for each method.
+*See documentation for detailed API. Refer to Lipisha API for parameters required for each method.*
