@@ -10,18 +10,18 @@ This package provides bindings for the Lipisha Payments API (http://developer.li
 Features
 --------
 
-- [x]  Send money
-- [x]  Get float balanace
-- [x]  Get account balance
-- [x]  Get Transactions
-- [x]  Complete transactions
-- [x]  Reverse transactions
-- [x]  Authorize card transactions
-- [x]  Capture card transactions
-- [x]  Get Customers
-- [x]  Create sub-users with specific roles
-- [x]  Send airtime
-- [x]  Send SMS
+- Send money
+- Get float balanace
+- Get account balance
+- Get Transactions
+- Complete transactions
+- Reverse transactions
+- Authorize card transactions
+- Capture card transactions
+- Get Customers
+- Create sub-users with specific roles
+- Send airtime
+- Send SMS
 
 SDK Examples
 ------------
@@ -48,9 +48,6 @@ These can be used to determine if the request was successful.
     response.getStatusMessage()
     response.getStatusDescription()
     response.getStatusCode()
-
-Usage Example
-=============
 
 .. code-block:: java
 
