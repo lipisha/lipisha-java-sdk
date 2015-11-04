@@ -23,6 +23,36 @@ Features
 - Send airtime
 - Send SMS
 
+Documentation
+--------------
+
+- Lipisha API: http://developer.lipisha.com/index.php/app/launch/api
+- JavaDoc: http://static.javadoc.io/com.lipisha.sdk/lipisha-sdk/1.1/com/lipisha/sdk/LipishaClient.html
+
+Installation and Download
+-------------------------
+
+Download the JAR from here:
+
+https://github.com/lipisha/lipisha-java-sdk/releases
+
+Add as a maven dependency:
+
+.. code-block:: xml
+
+    <dependency>
+      <groupId>com.lipisha.sdk</groupId>
+      <artifactId>lipisha-sdk</artifactId>
+      <version>1.1</version>
+    </dependency>
+
+Or Gradle:
+
+.. code-block:: groovy
+
+    compile 'com.lipisha.sdk:lipisha-sdk:1.1'
+
+
 SDK Examples
 ------------
 
@@ -39,7 +69,7 @@ Quick start
 The class below showcases integration with the API.
 
 
->Note that all responses from the API implement these methods.
+> Note that all responses from the API implement these methods.
 These can be used to determine if the request was successful.
 
 .. code-block:: java
@@ -48,6 +78,9 @@ These can be used to determine if the request was successful.
     response.getStatusMessage()
     response.getStatusDescription()
     response.getStatusCode()
+
+Example Integration
+-------------------
 
 .. code-block:: java
 
@@ -153,24 +186,5 @@ These can be used to determine if the request was successful.
 
     }
 
-
-Installation and Download
--------------------------
-
-Download the JAR from here:
-
-https://github.com/lipisha/lipisha-java-sdk/releases
-
-Add as a maven dependency:
-
-    <dependency>
-      <groupId>com.lipisha.sdk</groupId>
-      <artifactId>lipisha-sdk</artifactId>
-      <version>1.1</version>
-    </dependency>
-
-Or Gradle:
-
-    compile 'com.lipisha.sdk:lipisha-sdk:1.1'
-
-See documentation for detailed API. Refer to Lipisha API for parameters required for each method.
+..
+> See documentation for detailed API. Refer to Lipisha API for parameters required for each method.
