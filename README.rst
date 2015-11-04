@@ -153,12 +153,16 @@ Download the JAR from here:
 
 https://github.com/lipisha/lipisha-java-sdk/releases
 
-Add as a maven dependency::
+Add as a maven dependency:
 
     <dependency>
       <groupId>com.lipisha.sdk</groupId>
       <artifactId>lipisha-sdk</artifactId>
-      <version>1.0</version>
+      <version>1.1</version>
     </dependency>
+
+Or Gradle:
+
+    compile 'com.lipisha.sdk:lipisha-sdk:1.1'
 
 See documentation for detailed API. Refer to Lipisha API for parameters required for each method.
