@@ -4,8 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by M on 9/15/2016.
+ *
+ * Response from requesting money, content part
  */
-public class RequestMoney {
+public class RequestMoneyContent {
     @SerializedName("account_number")
     private String accountNumber;
     @SerializedName("mobile_number")

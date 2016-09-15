@@ -23,7 +23,7 @@ import retrofit.http.POST;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
- * 
+ * <p>
  * <p>See API documentation here: http://developer.lipisha.com/index.php/app/launch/api</p>
  */
 public interface LipishaAPI {
@@ -170,5 +170,12 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/request_money")
-
+    RequestResponse requestMoney(@Field("api_key") String apiKey,
+                                 @Field("api_signature") String apiSignature,
+                                 @Field("account_number") String accountNumber,
+                                 @Field("mobile_number") String mobile_number,
+                                 @Field("method") String method,
+                                 @Field("amount") String amount,
+                                 @Field("api_key") String currency,
+                                 @Field("api_signature") String reference);
 }

@@ -4,7 +4,7 @@ import com.lipisha.sdk.LipishaClient;
 import com.lipisha.sdk.response.*;
 
 /**
- * Example of API Integration
+ * RequestMoneyResponse of API Integration
  */
 public class APIExample {
 
