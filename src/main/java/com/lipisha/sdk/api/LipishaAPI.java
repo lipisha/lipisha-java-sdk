@@ -167,4 +167,8 @@ public interface LipishaAPI {
                                                    @Field("api_type") String apiType,
                                                    @Field("transaction_index") String accountNumber,
                                                    @Field("transaction_reference") String cardNumber);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/request_money")
+
 }
