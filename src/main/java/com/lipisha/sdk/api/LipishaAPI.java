@@ -16,10 +16,10 @@
 package com.lipisha.sdk.api;
 
 import com.lipisha.sdk.response.*;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.POST;
-
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
@@ -170,12 +170,12 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/request_money")
-    RequestResponse requestMoney(@Field("api_key") String apiKey,
-                                 @Field("api_signature") String apiSignature,
-                                 @Field("account_number") String accountNumber,
-                                 @Field("mobile_number") String mobile_number,
-                                 @Field("method") String method,
-                                 @Field("amount") String amount,
-                                 @Field("api_key") String currency,
-                                 @Field("api_signature") String reference);
+    Call<RequestResponse> requestMoney(@Field("api_key") String apiKey,
+                                      @Field("api_signature") String apiSignature,
+                                      @Field("account_number") String accountNumber,
+                                      @Field("mobile_number") String mobile_number,
+                                      @Field("method") String method,
+                                      @Field("amount") String amount,
+                                      @Field("currency") String currency,
+                                      @Field("reference") String reference);
 }

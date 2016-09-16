@@ -3,10 +3,8 @@ package com.lipisha.sdk.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
-
-import java.util.Date;
+import retrofit2.GsonConverterFactory;
+import retrofit2.Retrofit;
 
 /**
  * Generates Lipisha API Service.
@@ -20,11 +18,11 @@ public class ServiceGenerator {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
 
-    public static <S> S createService(Class<S> serviceClass, String baseURL){
-        RestAdapter.Builder builder = new RestAdapter.Builder()
-                .setConverter(new GsonConverter(gson))
-                .setEndpoint(baseURL);
-        RestAdapter adapter = builder.build();
-        return adapter.create(serviceClass);
+    public static <S> S createService(Class<S> serviceClass, String baseURL) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseURL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(serviceClass);
     }
 }

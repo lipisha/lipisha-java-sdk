@@ -105,19 +105,24 @@
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
+            <artifactId>junit-dep</artifactId>
+            <version>4.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.squareup.retrofit</groupId>
+            <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
-            <version>1.9.0</version>
+            <version>2.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.4</version>
+            <version>2.7</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.retrofit2</groupId>
+            <artifactId>converter-gson</artifactId>
+            <version>2.0.0-beta3</version>
         </dependency>
     </dependencies>
 
