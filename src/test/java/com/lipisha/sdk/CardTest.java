@@ -4,6 +4,9 @@ import com.lipisha.sdk.response.CardTransactionResponse;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Card APIs tests.
@@ -31,7 +34,7 @@ public class CardTest extends TestCase {
     }
 
     public void testCardAuthorizeComplete() {
-        CardTransactionResponse cardTransactionResponse = lipishaClient.authorizeCardTransaction(TestConfig.FLOAT_ACCOUNT_NUMBER,
+        lipishaClient.authorizeCardTransaction(TestConfig.FLOAT_ACCOUNT_NUMBER,
                 TestConfig.TEST_CARD_NUMBER,
                 TestConfig.TEST_CARD_ADDRESS,
                 "",
@@ -42,25 +45,45 @@ public class CardTest extends TestCase {
                 TestConfig.TEST_CARD_ZIP,
                 TestConfig.TEST_CARD_SECURITY_CODE,
                 100.00f,
-                TestConfig.TEST_CARD_CURRENCY);
+                TestConfig.TEST_CARD_CURRENCY).enqueue(new Callback<CardTransactionResponse>() {
+            public void onResponse(Call<CardTransactionResponse> call, Response<CardTransactionResponse> response) {
+                CardTransactionResponse cardTransactionResponse = response.body();
+                assertNotNull(cardTransactionResponse);
+                assertEquals(true, cardTransactionResponse.isSuccessful());
+                String transactionIndex = cardTransactionResponse.getTransactionIndex();
+                String transactionReference = cardTransactionResponse.getTransactionReference();
+                assertNotNull(transactionIndex);
+                assertNotNull(transactionReference);
 
-        assertNotNull(cardTransactionResponse);
-        assertEquals(true, cardTransactionResponse.isSuccessful());
-        String transactionIndex = cardTransactionResponse.getTransactionIndex();
-        String transactionReference = cardTransactionResponse.getTransactionReference();
-        assertNotNull(transactionIndex);
-        assertNotNull(transactionReference);
+                completeCardTransaction(transactionIndex, transactionReference);
+            }
 
-        CardTransactionResponse completeResponse = lipishaClient.completeCardTransaction(transactionIndex,
-                transactionReference);
-        assertNotNull(completeResponse);
-        assertEquals(true, completeResponse.isSuccessful());
-        assertEquals(transactionIndex, completeResponse.getTransactionIndex());
-        assertEquals(transactionReference, completeResponse.getTransactionReference());
+            public void onFailure(Call<CardTransactionResponse> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public void completeCardTransaction(final String transactionIndex, final String transactionReference) {
+        lipishaClient.completeCardTransaction(transactionIndex,
+                transactionReference).enqueue(new Callback<CardTransactionResponse>() {
+            public void onResponse(Call<CardTransactionResponse> call, Response<CardTransactionResponse> response) {
+                CardTransactionResponse completeResponse = response.body();
+                assertNotNull(completeResponse);
+                assertEquals(true, completeResponse.isSuccessful());
+                assertEquals(transactionIndex, completeResponse.getTransactionIndex());
+                assertEquals(transactionReference, completeResponse.getTransactionReference());
+            }
+
+            public void onFailure(Call<CardTransactionResponse> call, Throwable throwable) {
+
+            }
+        });
+
     }
 
     public void testCardAuthorizeReverse() {
-        CardTransactionResponse cardTransactionResponse = lipishaClient.authorizeCardTransaction(TestConfig.FLOAT_ACCOUNT_NUMBER,
+        lipishaClient.authorizeCardTransaction(TestConfig.FLOAT_ACCOUNT_NUMBER,
                 TestConfig.TEST_CARD_NUMBER,
                 TestConfig.TEST_CARD_ADDRESS,
                 "",
@@ -71,20 +94,40 @@ public class CardTest extends TestCase {
                 TestConfig.TEST_CARD_ZIP,
                 TestConfig.TEST_CARD_SECURITY_CODE,
                 100.00f,
-                TestConfig.TEST_CARD_CURRENCY);
+                TestConfig.TEST_CARD_CURRENCY).enqueue(new Callback<CardTransactionResponse>() {
+            public void onResponse(Call<CardTransactionResponse> call, Response<CardTransactionResponse> response) {
+                CardTransactionResponse cardTransactionResponse = response.body();
+                assertNotNull(cardTransactionResponse);
+                assertEquals(true, cardTransactionResponse.isSuccessful());
+                String transactionIndex = cardTransactionResponse.getTransactionIndex();
+                String transactionReference = cardTransactionResponse.getTransactionReference();
+                assertNotNull(transactionIndex);
+                assertNotNull(transactionReference);
 
-        assertNotNull(cardTransactionResponse);
-        assertEquals(true, cardTransactionResponse.isSuccessful());
-        String transactionIndex = cardTransactionResponse.getTransactionIndex();
-        String transactionReference = cardTransactionResponse.getTransactionReference();
-        assertNotNull(transactionIndex);
-        assertNotNull(transactionReference);
+                reverseCardTransaction(transactionIndex, transactionReference);
+            }
 
-        CardTransactionResponse reverseResponse = lipishaClient.reverseCardTransaction(transactionIndex,
-                transactionReference);
-        assertNotNull(reverseResponse);
-        assertEquals(true, reverseResponse.isSuccessful());
-        assertEquals(transactionIndex, reverseResponse.getTransactionIndex());
-        assertEquals(transactionReference, reverseResponse.getTransactionReference());
+            public void onFailure(Call<CardTransactionResponse> call, Throwable throwable) {
+
+            }
+        });
+    }
+
+    public void reverseCardTransaction(final String transactionIndex, final String transactionReference) {
+        lipishaClient.reverseCardTransaction(transactionIndex,
+                transactionReference).enqueue(new Callback<CardTransactionResponse>() {
+            public void onResponse(Call<CardTransactionResponse> call, Response<CardTransactionResponse> response) {
+                CardTransactionResponse reverseResponse = response.body();
+                assertNotNull(reverseResponse);
+                assertEquals(true, reverseResponse.isSuccessful());
+                assertEquals(transactionIndex, reverseResponse.getTransactionIndex());
+                assertEquals(transactionReference, reverseResponse.getTransactionReference());
+            }
+
+            public void onFailure(Call<CardTransactionResponse> call, Throwable throwable) {
+
+            }
+        });
+
     }
 }

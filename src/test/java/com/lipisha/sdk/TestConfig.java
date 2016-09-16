@@ -10,11 +10,11 @@ public class TestConfig {
 
 
     public static final String BASE_URL = LipishaClient.SANDBOX_BASE_URL;
-    public static final String API_KEY = "00fb59d22197e55be82bc2a7661eea9b";
-    public static final String API_SIGNATURE = "R3qcDDqMhP4SqvWKFM1T8qIo2DyiZH1dOHw0VQVnzz7JqSczqJTDz9xcv7Yn8Ce6am9vv4riPjw3cODq/P/vNfH71PRiRGSJNECwdFKOmgdDFzPHsIFuOXMHOZnWs4ihRi1tm+1IMGF2vqk1I+iERm7Vl3kzhf3CrGMpFw1Qh/g=";
+    public static final String API_KEY = "<YOUR LIPISHA API KEY>";
+    public static final String API_SIGNATURE = "<YOUR LIPISHA API SIGNATURE>";
     public static final String API_VERSION = "1.3.0";
     public static final String API_TYPE = "Callback";
-    public static final String FLOAT_ACCOUNT_NUMBER = "02114";
+    public static final String FLOAT_ACCOUNT_NUMBER = "00454";
     public static final String PAYOUT_ACCOUNT_NUMBER = "00454";
     public static final String AIRTIME_ACCOUNT_NUMBER = "00455";
     public static final String TEST_MOBILE_NUMBER = "0722123456";
