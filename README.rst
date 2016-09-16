@@ -11,6 +11,7 @@ Features
 --------
 
 - Send money
+- Request money
 - Get float balanace
 - Get account balance
 - Get Transactions
