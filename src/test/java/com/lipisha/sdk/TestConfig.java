@@ -34,5 +34,6 @@ public class TestConfig {
     public static final String TEST_CARD_ZIP = "99999";
     public static final String TEST_CARD_SECURITY_CODE = "999";
     public static final String TEST_CARD_CURRENCY = "KES";
+    public static final String TEST_REQUEST_MONEY_METHOD = "Paybil (MPESA)";
 
 }

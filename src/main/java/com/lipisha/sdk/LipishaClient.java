@@ -3,6 +3,7 @@ package com.lipisha.sdk;
 import com.lipisha.sdk.api.LipishaAPI;
 import com.lipisha.sdk.api.ServiceGenerator;
 import com.lipisha.sdk.response.*;
+import retrofit2.Call;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,8 +31,8 @@ public class LipishaClient {
      * @param apiSignature Lipisha API Signature from production or sandbox settings
      * @param apiVersion   Lipisha API version we're connecting to.
      * @param apiType      Lipisha API type we're connecting to.
-     * @param baseUrl       Base URL of Lipisha API endpoint. Either {@link LipishaClient#PROD_BASE_URL} for the
-     *                      production environment or {@link LipishaClient#SANDBOX_BASE_URL} for the sandbox.
+     * @param baseUrl      Base URL of Lipisha API endpoint. Either {@link LipishaClient#PROD_BASE_URL} for the
+     *                     production environment or {@link LipishaClient#SANDBOX_BASE_URL} for the sandbox.
      */
     public LipishaClient(String apiKey, String apiSignature, String apiVersion, String apiType, String baseUrl) {
         this.apiKey = apiKey;
@@ -44,10 +45,10 @@ public class LipishaClient {
     /**
      * Sets up a {@link LipishaClient} response with default version and api type set up.
      *
-     * @param apiKey        Lipisha API Key
-     * @param apiSignature  Lipisha API Signature
-     * @param baseUrl       Base URL of Lipisha API endpoint. Either {@link LipishaClient#PROD_BASE_URL} for the
-     *                      production environment or {@link LipishaClient#SANDBOX_BASE_URL} for the sandbox.
+     * @param apiKey       Lipisha API Key
+     * @param apiSignature Lipisha API Signature
+     * @param baseUrl      Base URL of Lipisha API endpoint. Either {@link LipishaClient#PROD_BASE_URL} for the
+     *                     production environment or {@link LipishaClient#SANDBOX_BASE_URL} for the sandbox.
      */
     public LipishaClient(String apiKey, String apiSignature, String baseUrl) {
         this.apiKey = apiKey;
@@ -60,9 +61,9 @@ public class LipishaClient {
     /**
      * Gets account balance.
      *
-     * @return    The account balance for the main Lipisha account with response status.
+     * @return The account balance for the main Lipisha account with response status.
      */
-    public AccountBalance getBalance() {
+    public Call<AccountBalance> getBalance() {
         return this.lipishaAPI.getBalance(this.apiKey, this.apiSignature, this.apiVersion, this.apiType);
     }
 
@@ -70,9 +71,9 @@ public class LipishaClient {
      * Get float balance for given account number.
      *
      * @param accountNumber Float account number.
-     * @return              The float available for provided float account with response status.
+     * @return The float available for provided float account with response status.
      */
-    public AccountFloat getFloat(String accountNumber) {
+    public Call<AccountFloat> getFloat(String accountNumber) {
         return this.lipishaAPI.getFloat(this.apiKey, this.apiSignature, this.apiVersion, this.apiType, accountNumber);
     }
 
@@ -82,9 +83,9 @@ public class LipishaClient {
      * @param mobileNumber  Mobile number to send money to
      * @param amount        Amount to send to mobile number
      * @param payoutAccount Payout account to fund this transaction
-     * @return              Status response from sending money
+     * @return Status response from sending money
      */
-    public Payout sendMoney(String mobileNumber, int amount, String payoutAccount) {
+    public Call<Payout> sendMoney(String mobileNumber, int amount, String payoutAccount) {
         return this.lipishaAPI.sendMoney(apiKey, apiSignature, apiVersion, apiType, payoutAccount, mobileNumber, amount);
     }
 
@@ -98,9 +99,9 @@ public class LipishaClient {
      *                       AIR - Airtel
      *                       YU - Yu
      *                       ORA - Orange
-     * @return               Status response after sending airtime
+     * @return Status response after sending airtime
      */
-    public AirtimeDisbursement sendAirtime(String mobileNumber, int airtimeAmount, String airtimeAccount,
+    public Call<AirtimeDisbursement> sendAirtime(String mobileNumber, int airtimeAmount, String airtimeAccount,
                                            String networkCode) {
         return this.lipishaAPI.sendAirtime(apiKey, apiSignature, apiVersion, apiType, airtimeAccount, mobileNumber,
                 airtimeAmount, networkCode);
@@ -110,9 +111,9 @@ public class LipishaClient {
      * @param mobileNumber Mobile number to send SMS to
      * @param smsAccount   TransactionAccount to charge for sending SMS
      * @param message      SMS Message content
-     * @return             Status response after sending an SMS
+     * @return Status response after sending an SMS
      */
-    public SMSReport sendSMS(String mobileNumber, String smsAccount, String message) {
+    public Call<SMSReport> sendSMS(String mobileNumber, String smsAccount, String message) {
         return this.lipishaAPI.sendSMS(apiKey, apiSignature, apiVersion, apiType, smsAccount, mobileNumber, message);
     }
 
@@ -120,9 +121,9 @@ public class LipishaClient {
      * Acknowledge transaction id (Useful when working via IPN)
      *
      * @param transactionIds List of transaction ids to acknowledge.
-     * @return               Status response after confirming multiple transactions.
+     * @return Status response after confirming multiple transactions.
      */
-    public TransactionResponse confirmTransaction(String[] transactionIds) {
+    public Call<TransactionResponse> confirmTransaction(String[] transactionIds) {
         StringBuilder listBuilder = new StringBuilder();
         String delim = "";
         for (String i : transactionIds) {
@@ -136,9 +137,9 @@ public class LipishaClient {
      * Reverse a transaction and refund payment to customer.
      *
      * @param transactionId Transaction id to reverse (May be comma separated string of transactions)
-     * @return              Status response after reversing a transaction (with one or more transactions)
+     * @return Status response after reversing a transaction (with one or more transactions)
      */
-    public MultiTransactionResponse reverseTransaction(String transactionId) {
+    public Call<MultiTransactionResponse> reverseTransaction(String transactionId) {
         return this.lipishaAPI.reverseTransaction(apiKey, apiSignature, apiVersion, apiType, transactionId);
     }
 
@@ -146,9 +147,9 @@ public class LipishaClient {
      * Reverse a list of transactions and refund payment to customers.
      *
      * @param transactionIds List of transaction ids to reverse.
-     * @return               Status response after reversing a transaction(s)
+     * @return Status response after reversing a transaction(s)
      */
-    public MultiTransactionResponse reverseTransaction(String[] transactionIds) {
+    public Call<MultiTransactionResponse> reverseTransaction(String[] transactionIds) {
         StringBuilder listBuilder = new StringBuilder();
         String delim = "";
         for (String i : transactionIds) {
@@ -162,9 +163,9 @@ public class LipishaClient {
      * Confirm transaction id (Useful when working via IPN)
      *
      * @param transactionId Transaction id to acknowledge
-     * @return              Status response after confirming a single transaction.
+     * @return Status response after confirming a single transaction.
      */
-    public TransactionResponse confirmTransaction(String transactionId) {
+    public Call<TransactionResponse> confirmTransaction(String transactionId) {
         return this.lipishaAPI.confirmTransaction(apiKey, apiSignature, apiVersion, apiType, transactionId);
     }
 
@@ -189,9 +190,9 @@ public class LipishaClient {
      * @param transactionEmail          Email address associated with transaction
      * @param limit                     Max number of records to return
      * @param offset                    First transaction to return (0 - start at the beginning, 9 - Start at 10th record)
-     * @return                          Status and transactions found based on search parameters.
+     * @return Status and transactions found based on search parameters.
      */
-    public MultiTransactionResponse getTransactions(String transactionIds,
+    public Call<MultiTransactionResponse> getTransactions(String transactionIds,
                                                     String transactionTypes,
                                                     String transactionMethods,
                                                     Date transactionDateStart,
@@ -235,9 +236,9 @@ public class LipishaClient {
      * @param transactionName           Name of filter against (Name of person or entity) e.g.Jane Doe
      * @param transactionMobileNumber   Mobile number of transaction
      * @param transactionEmail          Email address associated with transaction
-     * @return                          Status and transactions found based on search parameters.
+     * @return Status and transactions found based on search parameters.
      */
-    public MultiTransactionResponse getTransactions(String transactionIds,
+    public Call<MultiTransactionResponse> getTransactions(String transactionIds,
                                                     String transactionTypes,
                                                     String transactionMethods,
                                                     Date transactionDateStart,
@@ -266,9 +267,9 @@ public class LipishaClient {
     /**
      * Get customer records.
      *
-     * @return    Status response and {@link com.lipisha.sdk.response.Customer} records
+     * @return Status response and {@link com.lipisha.sdk.response.Customer} records
      */
-    public CustomerResponse getCustomers() {
+    public Call<CustomerResponse> getCustomers() {
         return this.lipishaAPI.getCustomers(apiKey, apiSignature, apiVersion, apiType);
     }
 
@@ -278,9 +279,9 @@ public class LipishaClient {
      * @param accountType    TransactionAccount type identifier. e.g. 1 for Mpesa Paybill/Airtel Money
      * @param accountName    Name of the new account
      * @param accountManager Login name of parent account to this new account
-     * @return               Status and response after creating a transaction account
+     * @return Status and response after creating a transaction account
      */
-    public TransactionAccountResponse createTransactionAccount(int accountType, String accountName, String accountManager) {
+    public Call<TransactionAccountResponse> createTransactionAccount(int accountType, String accountName, String accountManager) {
         return this.lipishaAPI.createTransactionAccount(apiKey, apiSignature, apiVersion, apiType,
                 accountType, accountName, accountManager);
     }
@@ -296,9 +297,9 @@ public class LipishaClient {
      * @param bankBranch     Bank branch
      * @param bankAddress    Bank address
      * @param swiftCode      Swift code for associated bank or bank branch
-     * @return               Status response after creating a withdrawal account
+     * @return Status response after creating a withdrawal account
      */
-    public WithdrawalAccountResponse createWithdrawalAccount(int accountType, String accountName, String accountManager,
+    public Call<WithdrawalAccountResponse> createWithdrawalAccount(int accountType, String accountName, String accountManager,
                                                              String accountNumber, String bankName, String bankBranch,
                                                              String bankAddress, String swiftCode) {
         return this.lipishaAPI.createWithdrawalAccount(apiKey, apiSignature, apiVersion, apiType,
@@ -314,9 +315,9 @@ public class LipishaClient {
      * @param mobileNumber Mobile phone number for this user
      * @param userName     Login for this user
      * @param password     Password for this user
-     * @return             Status response after creating a user
+     * @return Status response after creating a user
      */
-    public UserResponse createUser(String fullName, String role, String email, String mobileNumber, String userName,
+    public Call<UserResponse> createUser(String fullName, String role, String email, String mobileNumber, String userName,
                                    String password) {
         return this.lipishaAPI.createUser(apiKey, apiSignature, apiVersion, apiType,
                 fullName, role, email, mobileNumber, userName, password);
@@ -325,15 +326,15 @@ public class LipishaClient {
     /**
      * <p>This API call for authorizes a credit card transaction locking in the
      * specified amount in the card holder's bank account.</p>
-     *
+     * <p>
      * <p>The transaction then needs to be completed using the {@link #completeCardTransaction(String, String)} call to effect
      * settlement of funds into the merchant's account or reversed using the {@link #reverseCardTransaction(String, String)}
      * API call.</p>
-     *
+     * <p>
      * <p>This function reserves funds on the cardholder's account and if successful then you must call the
      * {@link #completeCardTransaction(String, String)} function with the transaction_index and transaction_reference returned by
      * this function to actually move the money to your account.</p>
-     * 
+     * <p>
      * <p>Kindly note that in some cases, debit card transactions may be settled before the <b>Complete Card
      * Transaction</b> API call is completed and may NOT be reversible depending on the issuing bank.</p>
      *
@@ -349,9 +350,9 @@ public class LipishaClient {
      * @param securityCode  Security code (Usually at the back of the card)
      * @param amount        Amount to charge the card
      * @param currency      Currecy code to charge the card in ISO_4217 format
-     * @return              Status response after authorizing a card transaction
+     * @return Status response after authorizing a card transaction
      */
-    public CardTransactionResponse authorizeCardTransaction(String accountNumber, String cardNumber, String address1,
+    public Call<CardTransactionResponse> authorizeCardTransaction(String accountNumber, String cardNumber, String address1,
                                                             String address2, String expiry, String name,
                                                             String state, String country, String zipCode,
                                                             String securityCode, Float amount, String currency) {
@@ -363,35 +364,52 @@ public class LipishaClient {
     /**
      * <p>This API call completes a credit card transaction and initiates settlement of funds from the cardholder bank
      * account into the merchant's account.</p>
-     *
+     * <p>
      * <p>This function moves already reserved funds on the cardholder's account into your account. It's called with
      * the {@code transaction_index} and {@code transaction_reference} returned by the
      * {@link #authorizeCardTransaction} API call to actually move the money to your account.</p>
      *
-     * @param transactionIndex      Transaction index to complete
-     * @param transactionReference  Transaction reference to complete
-     * @return                      Status response after completing a card transaction
+     * @param transactionIndex     Transaction index to complete
+     * @param transactionReference Transaction reference to complete
+     * @return Status response after completing a card transaction
      */
-    public CardTransactionResponse completeCardTransaction(String transactionIndex, String transactionReference) {
+    public Call<CardTransactionResponse> completeCardTransaction(String transactionIndex, String transactionReference) {
         return this.lipishaAPI.completeCardTransaction(apiKey, apiSignature, apiVersion, apiType,
                 transactionIndex, transactionReference);
     }
 
     /**
      * <p>This API call reverses an authorized credit card transaction.</p>
-     *
+     * <p>
      * <p>This function unreserves funds previously authorized. It's called with the
      * {@code transaction_index} and {@code transaction_reference} returned by the {@link #authorizeCardTransaction}
      * to reverse the authorization.
      *
-     * @param transactionIndex      Transaction index of transaction to reverse
-     * @param transactionReference  Transaction reference of transaction to reverse
-     * @return                      Status response after reversing a card transaction
+     * @param transactionIndex     Transaction index of transaction to reverse
+     * @param transactionReference Transaction reference of transaction to reverse
+     * @return Status response after reversing a card transaction
      */
-    public CardTransactionResponse reverseCardTransaction(String transactionIndex, String transactionReference) {
+    public Call<CardTransactionResponse> reverseCardTransaction(String transactionIndex, String transactionReference) {
         return this.lipishaAPI.reverseCardTransaction(apiKey, apiSignature, apiVersion, apiType,
                 transactionIndex, transactionReference);
     }
 
 
+    /**
+     * <p>This API call initiates an M-PESA USSD request on a device</p>
+     *
+     * @param accountNumber The account number where the requested amount will be  deposited
+     * @param mobile_number The mobile number of the client
+     * @param method Takes only one parameter Paybill (MPESA)
+     * @param amount The amount you need to request
+     * @param currency  KES
+     * @param reference The unique identifier for the transaction
+     * @return
+     */
+    public Call<RequestResponse> requestMoney(
+            String apiKey, String apiSignature, String accountNumber,
+            String mobile_number, String method, String amount, String currency, String reference) {
+
+        return this.lipishaAPI.requestMoney(apiKey, apiSignature, accountNumber, mobile_number, method, amount, currency, reference);
+    }
 }

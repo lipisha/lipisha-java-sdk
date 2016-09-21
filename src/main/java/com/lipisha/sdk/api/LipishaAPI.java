@@ -16,65 +16,65 @@
 package com.lipisha.sdk.api;
 
 import com.lipisha.sdk.response.*;
-import retrofit.http.Field;
-import retrofit.http.FormUrlEncoded;
-import retrofit.http.POST;
-
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
 
 /**
  * <p>Sets up a JAVA interface to the Lipisha API</p>
- * 
+ * <p>
  * <p>See API documentation here: http://developer.lipisha.com/index.php/app/launch/api</p>
  */
 public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_balance")
-    AccountBalance getBalance(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<AccountBalance> getBalance(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                               @Field("api_version") String apiVersion, @Field("api_type") String apiType);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_float")
-    AccountFloat getFloat(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<AccountFloat> getFloat(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                           @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                           @Field("account_number") String accountNumber);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/send_money")
-    Payout sendMoney(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<Payout> sendMoney(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                      @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                      @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
                      @Field("amount") int amount);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/send_airtime")
-    AirtimeDisbursement sendAirtime(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<AirtimeDisbursement> sendAirtime(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                     @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                     @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
                                     @Field("amount") int airtimeAmount, @Field("network") String network);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/send_sms")
-    SMSReport sendSMS(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<SMSReport> sendSMS(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                       @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                       @Field("account_number") String accountNumber, @Field("mobile_number") String mobileNumber,
                       @Field("message") String message);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/acknowledge_transaction")
-    TransactionResponse confirmTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<TransactionResponse> confirmTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                            @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                            @Field("transaction") String transactionIds);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/reverse_transaction")
-    MultiTransactionResponse reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<MultiTransactionResponse> reverseTransaction(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                                 @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                                 @Field("transaction") String transactionIds);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_transactions")
-    MultiTransactionResponse getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<MultiTransactionResponse> getTransactions(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                              @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                              @Field("transaction") String transactionIds,
                                              @Field("transaction_type") String transactionTypes,
@@ -95,12 +95,12 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/get_customers")
-    CustomerResponse getCustomers(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<CustomerResponse> getCustomers(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                   @Field("api_version") String apiVersion, @Field("api_type") String apiType);
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/create_payment_account")
-    TransactionAccountResponse createTransactionAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<TransactionAccountResponse> createTransactionAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                                         @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                                         @Field("transaction_account_type") int accountType,
                                                         @Field("transaction_account_name") String accountName,
@@ -108,7 +108,7 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/create_withdrawal_account")
-    WithdrawalAccountResponse createWithdrawalAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<WithdrawalAccountResponse> createWithdrawalAccount(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                                                       @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                                                       @Field("transaction_account_type") int accountType,
                                                       @Field("transaction_account_name") String accountName,
@@ -121,7 +121,7 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/create_user")
-    UserResponse createUser(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
+    Call<UserResponse> createUser(@Field("api_key") String apiKey, @Field("api_signature") String apiSignature,
                             @Field("api_version") String apiVersion, @Field("api_type") String apiType,
                             @Field("full_name") String fullName,
                             @Field("role") String role,
@@ -132,7 +132,7 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/authorize_card_transaction")
-    CardTransactionResponse authorizeCardTransaction(@Field("api_key") String apiKey,
+    Call<CardTransactionResponse> authorizeCardTransaction(@Field("api_key") String apiKey,
                                                      @Field("api_signature") String apiSignature,
                                                      @Field("api_version") String apiVersion,
                                                      @Field("api_type") String apiType,
@@ -152,7 +152,7 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/complete_card_transaction")
-    CardTransactionResponse completeCardTransaction(@Field("api_key") String apiKey,
+    Call<CardTransactionResponse> completeCardTransaction(@Field("api_key") String apiKey,
                                                     @Field("api_signature") String apiSignature,
                                                     @Field("api_version") String apiVersion,
                                                     @Field("api_type") String apiType,
@@ -161,10 +161,21 @@ public interface LipishaAPI {
 
     @FormUrlEncoded
     @POST("/index.php/v2/api/reverse_card_transaction")
-    CardTransactionResponse reverseCardTransaction(@Field("api_key") String apiKey,
+    Call<CardTransactionResponse> reverseCardTransaction(@Field("api_key") String apiKey,
                                                    @Field("api_signature") String apiSignature,
                                                    @Field("api_version") String apiVersion,
                                                    @Field("api_type") String apiType,
                                                    @Field("transaction_index") String accountNumber,
                                                    @Field("transaction_reference") String cardNumber);
+
+    @FormUrlEncoded
+    @POST("/index.php/v2/api/request_money")
+    Call<RequestResponse> requestMoney(@Field("api_key") String apiKey,
+                                      @Field("api_signature") String apiSignature,
+                                      @Field("account_number") String accountNumber,
+                                      @Field("mobile_number") String mobile_number,
+                                      @Field("method") String method,
+                                      @Field("amount") String amount,
+                                      @Field("currency") String currency,
+                                      @Field("reference") String reference);
 }
