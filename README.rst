@@ -28,7 +28,7 @@ Documentation
 --------------
 
 - Lipisha API: http://developer.lipisha.com/index.php/app/launch/api
-- JavaDoc: http://static.javadoc.io/com.lipisha.sdk/lipisha-sdk/1.1/com/lipisha/sdk/LipishaClient.html
+- JavaDoc: http://static.javadoc.io/com.lipisha.sdk/lipisha-sdk/2.0/com/lipisha/sdk/LipishaClient.html
 
 Installation and Download
 -------------------------
@@ -44,14 +44,14 @@ Add as a maven dependency:
     <dependency>
       <groupId>com.lipisha.sdk</groupId>
       <artifactId>lipisha-sdk</artifactId>
-      <version>1.1</version>
+      <version>2.0</version>
     </dependency>
 
 Or Gradle:
 
 .. code-block:: groovy
 
-    compile 'com.lipisha.sdk:lipisha-sdk:1.1'
+    compile 'com.lipisha.sdk:lipisha-sdk:2.0'
 
 
 SDK Examples
